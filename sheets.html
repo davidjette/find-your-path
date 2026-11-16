@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Build a Business - Team Sheets</title>
+<style>
+@page{size:letter portrait;margin:.5in}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Segoe UI",Arial,sans-serif;color:#111}
+.page{height:9.9in;page-break-after:always;display:flex;flex-direction:column;--c:#111}
+.page:last-child{page-break-after:auto}
+.build{--c:#2563eb}.tell{--c:#ea580c}.protect{--c:#15803d}.score{--c:#1e1b4b}
+.head{background:var(--c);color:#fff;border-radius:18px;padding:.18in .3in;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.head h1{margin:0;font-size:44pt;line-height:1;font-weight:900}
+.head p{margin:.06in 0 0;font-size:15pt}
+.how{font-size:14pt;margin:.14in 0 .06in;font-weight:600}
+.row{display:flex;align-items:center;gap:.15in;border-bottom:2px solid #ddd;height:.8in}
+.row .name{flex:1;font-size:19pt;font-weight:800}
+.row .name small{display:block;font-size:11.5pt;font-weight:500;color:#555}
+.row .blank{flex:1;border-bottom:3px solid #999;height:.5in;margin-right:.2in}
+.spot{width:.72in;height:.72in;border:3px dashed var(--c);border-radius:50%;flex:none}
+.total{margin-top:auto;display:flex;gap:.3in;align-items:center;border:4px solid var(--c);border-radius:18px;padding:.14in .25in;font-size:19pt;font-weight:800}
+.total .lab{flex:1}
+.box{width:1in;height:.8in;border:4px solid var(--c);border-radius:12px;flex:none}
+.total span.y{font-size:12pt;text-align:center;display:block;font-weight:600}
+.gamble{margin-top:.12in;border:4px dashed #dc2626;border-radius:18px;padding:.1in .25in;display:flex;align-items:center;gap:.15in}
+.gamble .name{flex:1;font-size:17pt;font-weight:800}
+.gamble small{display:block;font-size:11.5pt;font-weight:500}
+.gamble .spot{border-color:#dc2626}
+.line{font-size:17pt;font-weight:700;margin:.12in 0;display:flex;align-items:flex-end;gap:.12in}
+.line i{flex:1;border-bottom:3px solid #999;height:.4in}
+table{width:100%;border-collapse:collapse;margin-top:.1in}
+th,td{border:3px solid #1e1b4b;padding:.1in;font-size:14.5pt;height:.6in}
+th{background:#eee;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+td:first-child{text-align:left;font-weight:700;width:58%}
+td small{display:block;font-weight:500;font-size:10.5pt;color:#444}
+.celebs{display:grid;grid-template-columns:repeat(6,1fr);gap:.1in;text-align:center;font-size:10pt;font-weight:800;line-height:1.15}
+.celebs img{display:block;width:1.08in;height:1.08in;margin:0 auto .04in;border-radius:50%;object-fit:cover;object-position:50% 18%;border:4px solid var(--c)}
+.rule{font-size:13pt;margin:.12in 0 0;line-height:1.35}
+</style>
+</head>
+<body>
+
+<section class="page build">
+  <div class="head"><h1>BUILD IT</h1><p>Make your product great.</p></div>
+  <p class="how">Put a coin on each thing you want to buy. Every coin is 1 point. You can put 2 coins on one thing.</p>
+  <div class="row"><div class="name">Engineer<small>Figures out how to make it work</small></div><div class="spot"></div><div class="spot"></div></div>
+  <div class="row"><div class="name">Scientist<small>Invents something new</small></div><div class="spot"></div><div class="spot"></div></div>
+  <div class="row"><div class="name">Designer<small>Makes it look amazing</small></div><div class="spot"></div><div class="spot"></div></div>
+  <div class="row"><div class="name">Testing<small>Try it on real people and fix what breaks</small></div><div class="spot"></div><div class="spot"></div></div>
+  <div class="row"><div class="name">Better materials<small>Stronger, tastier, faster</small></div><div class="spot"></div><div class="spot"></div></div>
+  <div class="row"><div class="name">Patent<small>Proof that the idea is yours</small></div><div class="spot"></div><div class="spot"></div></div>
+  <div class="row"><div class="blank"></div><div class="spot"></div><div class="spot"></div></div>
+  <div class="row"><div class="blank"></div><div class="spot"></div><div class="spot"></div></div>
+  <div class="total"><div class="lab">Count ALL the coins on this sheet</div><div><div class="box"></div><span class="y">Year 1</span></div><div><div class="box"></div><span class="y">Year 2</span></div></div>
+</section>
+
+<section class="page tell">
+  <div class="head"><h1>TELL PEOPLE</h1><p>Let the world know about it.</p></div>
+  <p class="how">Put a coin on each thing you want to buy. Every coin is 1 point. You can put 2 coins on one thing.</p>
+  <div class="row"><div class="name">Posters and signs<small>All over town</small></div><div class="spot"></div><div class="spot"></div></div>
+  <div class="row"><div class="name">Online ads<small>Videos and pop-ups</small></div><div class="spot"></div><div class="spot"></div></div>
+  <div class="row"><div class="name">Free samples<small>Let people try it</small></div><div class="spot"></div><div class="spot"></div></div>
+  <div class="row"><div class="name">Ask your customers<small>Find out what people really want</small></div><div class="spot"></div><div class="spot"></div></div>
+  <div class="row"><div class="name">Logo and jingle<small>So people remember you</small></div><div class="spot"></div><div class="spot"></div></div>
+  <div class="row"><div class="blank"></div><div class="spot"></div><div class="spot"></div></div>
+  <p class="how" style="margin-top:.12in">HIRE A CELEBRITY: 1 coin. Put it right on their face. Pick ONE, or nobody.</p>
+  <div class="celebs">
+    <div><img src="img/washington.jpg" alt="">George Washington</div>
+    <div><img src="img/cleopatra.jpg" alt="">Cleopatra</div>
+    <div><img src="img/shakespeare.jpg" alt="">William Shakespeare</div>
+    <div><img src="img/earhart.jpg" alt="">Amelia Earhart</div>
+    <div><img src="img/einstein.jpg" alt="">Albert Einstein</div>
+    <div><img src="img/davinci.jpg" alt="">Leonardo da Vinci</div>
+  </div>
+  <div class="total"><div class="lab">Count ALL the coins on this sheet<br><span style="font-size:12pt;font-weight:600">The celebrity coin counts too.</span></div><div><div class="box"></div><span class="y">Year 1</span></div><div><div class="box"></div><span class="y">Year 2</span></div></div>
+</section>
+
+<section class="page protect">
+  <div class="head"><h1>PROTECT IT</h1><p>Be ready when things go wrong.</p></div>
+  <p class="how">Put a coin on each thing you want to buy. Every coin is 1 point. You can put 2 coins on one thing.</p>
+  <div class="row"><div class="name">Accountant<small>Counts the money and pays the taxes</small></div><div class="spot"></div><div class="spot"></div></div>
+  <div class="row"><div class="name">Lawyer<small>Knows the rules and guards your idea</small></div><div class="spot"></div><div class="spot"></div></div>
+  <div class="row"><div class="name">Insurance<small>Pays you back if something breaks</small></div><div class="spot"></div><div class="spot"></div></div>
+  <div class="row"><div class="name">Rainy-day savings<small>Extra money for surprises</small></div><div class="spot"></div><div class="spot"></div></div>
+  <div class="row"><div class="name">A safe workshop<small>Locks, sprinklers, a good roof</small></div><div class="spot"></div><div class="spot"></div></div>
+  <div class="row"><div class="name">Backup plan<small>What you do if Plan A fails</small></div><div class="spot"></div><div class="spot"></div></div>
+  <div class="row"><div class="blank"></div><div class="spot"></div><div class="spot"></div></div>
+  <div class="row"><div class="blank"></div><div class="spot"></div><div class="spot"></div></div>
+  <div class="total"><div class="lab">Count ALL the coins on this sheet</div><div><div class="box"></div><span class="y">Year 1</span></div><div><div class="box"></div><span class="y">Year 2</span></div></div>
+</section>
+
+<section class="page score">
+  <div class="head"><h1>SCORECARD</h1><p>The Banker fills this in.</p></div>
+  <div class="line">Company name: <i></i></div>
+  <div class="line">What we sell: <i></i></div>
+  <div class="line">Our team: <i></i></div>
+  <table>
+    <tr><th></th><th>Year 1</th><th>Year 2</th></tr>
+    <tr><td>Coins to spend</td><td style="text-align:center;font-size:24pt;font-weight:900">10</td><td></td></tr>
+    <tr><td>BUILD IT total</td><td></td><td></td></tr>
+    <tr><td>TELL PEOPLE total<small>Count the celebrity coin too</small></td><td></td><td></td></tr>
+    <tr><td>PROTECT IT total</td><td></td><td></td></tr>
+    <tr><td>Celebrity we hired</td><td></td><td></td></tr>
+    <tr><td>Customers we got</td><td></td><td></td></tr>
+    <tr><td>CUSTOMERS WE KEPT</td><td></td><td></td></tr>
+  </table>
+  <p class="rule"><b>What will we change in Year 2?</b></p>
+  <div class="line"><i></i></div>
+  <div class="line"><i></i></div>
+</section>
+
+</body>
+</html>

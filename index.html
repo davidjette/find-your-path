@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Build a Business</title>
+<style>
+:root{
+  --build:#2563eb; --tell:#ea580c; --protect:#15803d; --risk:#dc2626;
+  --ink:#1e1b4b; --soft:#6b6890; --bg:#fff6dc; --card:#ffffff; --line:#eadfbf; --gold:#fbbf24; --pink:#db2777;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{background:var(--bg) radial-gradient(#f5e3a8 2px,transparent 2.5px) 0 0/34px 34px;color:var(--ink);font-family:"Segoe UI","Trebuchet MS",system-ui,Arial,sans-serif;display:flex;flex-direction:column}
+button{font:inherit;cursor:pointer;border:0;border-radius:14px;padding:.5em 1em;font-weight:800;background:var(--ink);color:#fff;transition:transform .1s}
+button:hover{transform:translateY(-2px)} button:active{transform:translateY(1px)}
+button.ghost{background:var(--card);color:var(--ink);border:2px solid var(--line)}
+button.on{background:var(--gold);color:var(--ink);border:2px solid var(--gold)}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:4px solid var(--gold);outline-offset:2px}
+header{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:8px 16px;border-bottom:3px solid var(--line);background:var(--card)}
+header .brand{font-weight:900;font-size:1.1rem;margin-right:auto}
+header button{padding:.35em .8em;font-size:.9rem}
+main{flex:1;overflow:auto;padding:22px 4vw}
+h1{font-size:clamp(2.6rem,6.5vw,5.6rem);line-height:1.02;margin:0 0 .25em;font-weight:900;letter-spacing:-.02em}
+h2{font-size:clamp(1.6rem,3vw,2.4rem);margin:0 0 .5em}
+.b{color:var(--build)} .t{color:var(--tell)} .p{color:var(--protect)} .r{color:var(--risk)} .k{color:var(--pink)}
+mark{background:var(--gold);color:var(--ink);padding:0 .15em;border-radius:.15em;display:inline-block;transform:rotate(-1.5deg)}
+
+/* slides */
+.slide{min-height:calc(100vh - 175px);display:flex;flex-direction:column;justify-content:center;max-width:1250px;margin:0 auto}
+.slide>*{animation:rise .5s both} .slide>*:nth-child(2){animation-delay:.12s} .slide>*:nth-child(3){animation-delay:.24s} .slide>*:nth-child(4){animation-delay:.36s} .slide>*:nth-child(5){animation-delay:.48s}
+@keyframes rise{from{opacity:0;transform:translateY(24px)}}
+.slide p,.slide li{font-size:clamp(1.3rem,2.7vw,2.3rem);line-height:1.3;margin:.3em 0}
+.slide ul{list-style:none;padding:0;margin:.2em 0}
+.slide .note{color:var(--soft);font-size:clamp(1rem,1.7vw,1.4rem)}
+.emoji{font-size:clamp(3rem,8vw,6rem);line-height:1;display:inline-block;animation:bob 1.6s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-12px) rotate(6deg)}}
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:10px}
+.trio>div{background:var(--card);border-radius:22px;padding:18px 22px;border-top:14px solid;box-shadow:0 6px 0 var(--line)}
+.trio h3{margin:0 0 .1em;font-size:clamp(1.5rem,2.8vw,2.4rem)}
+.trio p{font-size:clamp(1rem,1.8vw,1.5rem)}
+.chips{display:flex;flex-wrap:wrap;gap:12px;margin-top:12px}
+.chips span{background:var(--card);border:3px solid var(--line);border-radius:999px;padding:.3em .9em;font-size:clamp(1.1rem,2vw,1.7rem);font-weight:800;box-shadow:0 4px 0 var(--line)}
+.big{font-size:clamp(2rem,5vw,4rem)!important;font-weight:900;line-height:1.1!important}
+.faces{display:flex;flex-wrap:wrap;gap:18px;margin:14px 0}
+.face{text-align:center;font-weight:800;font-size:clamp(.9rem,1.4vw,1.2rem);width:clamp(100px,12vw,160px)}
+.face img,.news img{width:100%;aspect-ratio:1;border-radius:50%;object-fit:cover;object-position:50% 18%;border:6px solid var(--tell);background:#ddd;display:block}
+.timer{display:flex;align-items:center;gap:20px;margin-top:14px}
+#tm{font-size:clamp(3rem,9vw,7rem);font-weight:900;font-variant-numeric:tabular-nums;background:var(--ink);color:var(--gold);border-radius:20px;padding:0 .3em;line-height:1.15}
+#tm.done{background:var(--risk);color:#fff;animation:bob .5s infinite}
+.go{font-size:clamp(1.2rem,2.2vw,1.8rem);background:var(--pink);align-self:flex-start;margin-top:16px}
+.slidenav{display:flex;gap:12px;align-items:center;justify-content:center;padding:8px}
+.slidenav span{font-weight:700;color:var(--soft);min-width:5em;text-align:center}
+
+/* game */
+.banner{display:flex;gap:24px;align-items:center;background:var(--card);border-radius:24px;padding:18px 26px;margin-bottom:14px;border-left:16px solid var(--pink);box-shadow:0 6px 0 var(--line);animation:rise .4s both}
+.banner .bx{flex:1}
+.banner .kick{font-weight:900;text-transform:uppercase;letter-spacing:.08em;color:var(--pink);font-size:1rem}
+.banner .hl{font-size:clamp(1.5rem,3vw,2.6rem);font-weight:900;line-height:1.1}
+.banner small{display:block;color:var(--soft);font-size:clamp(1rem,1.5vw,1.3rem);margin-top:.2em}
+.banner .next{font-size:clamp(1.1rem,1.8vw,1.5rem);background:var(--pink);white-space:nowrap}
+#die{font-size:8rem;line-height:.9;color:var(--risk);min-width:1.1em;text-align:center}
+#die.rolling{animation:shake .18s infinite}
+@keyframes shake{25%{transform:rotate(-14deg) scale(1.1)}75%{transform:rotate(14deg) scale(.95)}}
+.news{display:grid;grid-template-columns:1fr 1fr;gap:16px;flex:1}
+.news>div{display:flex;gap:14px;align-items:center;border-radius:18px;padding:12px 16px;animation:pop .5s both}
+.news>div:nth-child(2){animation-delay:.9s}
+.news .star{background:#fef3c7} .news .oops{background:#fee2e2}
+.news img{width:110px;flex:none;border-color:var(--gold)} .news .oops img{border-color:var(--risk);filter:grayscale(1)}
+.news b{display:block;font-size:clamp(1.1rem,1.8vw,1.6rem);line-height:1.15} .news span{font-size:clamp(.95rem,1.3vw,1.15rem)}
+.news em{font-style:normal;font-weight:900;display:block;margin-top:.2em}
+@keyframes pop{from{opacity:0;transform:scale(.6)}60%{transform:scale(1.08)}}
+table{border-collapse:separate;border-spacing:0 7px;width:100%}
+th{font-size:.85rem;text-transform:uppercase;letter-spacing:.05em;color:var(--soft);text-align:center;padding:0 6px}
+th:first-child,td:first-child{text-align:left}
+td{background:var(--card);padding:8px 6px;text-align:center;font-size:1.3rem;font-weight:800}
+td:first-child{border-radius:14px 0 0 14px;padding-left:16px} td:last-child{border-radius:0 14px 14px 0}
+td small{display:block;font-weight:500;color:var(--soft);font-size:.85rem}
+td.new{animation:pop .5s both}
+input[type=number]{width:3em;font:inherit;font-size:1.45rem;font-weight:900;text-align:center;border:3px solid var(--line);border-radius:10px;padding:.1em}
+input.ib{border-color:var(--build);color:var(--build)} input.it{border-color:var(--tell);color:var(--tell)} input.ip{border-color:var(--protect);color:var(--protect)}
+input[type=text]{font:inherit;font-size:1.2rem;font-weight:700;border:3px solid var(--line);border-radius:10px;padding:.35em .6em;width:100%}
+select{font:inherit;font-size:1rem;font-weight:700;border:3px solid var(--line);border-radius:10px;padding:.3em;max-width:11em}
+.over{color:var(--risk)} .final{font-size:2rem;color:var(--ink)}
+.teamrow{display:grid;grid-template-columns:2.5em 1fr 1fr auto;gap:10px;align-items:center;margin-bottom:10px}
+.teamrow .n{font-weight:900;font-size:1.4rem;color:var(--soft)}
+.bar{height:24px;border-radius:12px;background:linear-gradient(90deg,var(--build),var(--pink),var(--tell));min-width:4px;animation:grow 1s both;transform-origin:left}
+@keyframes grow{from{transform:scaleX(0)}}
+.rank{font-size:1.7rem;font-weight:900;color:var(--soft)}
+.hint{color:var(--soft);font-size:1.05rem;margin:.3em 0 1em}
+.confetti{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:9}
+.confetti i{position:absolute;top:-3rem;font-style:normal;animation:fall 3s linear forwards}
+@keyframes fall{to{transform:translateY(115vh) rotate(540deg)}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">🚀 Build a Business</div>
+  <span id="tabs"></span>
+  <span style="width:16px"></span>
+  <span id="classes"></span>
+  <button class="ghost" id="reset"></button>
+</header>
+<main id="main"></main>
+
+<script>
+const CELEBS = [
+  {id:'washington', name:'George Washington', star:'His new dance, "The Delaware Crossing," goes viral!', oops:'Caught telling a fib about a cherry tree!'},
+  {id:'cleopatra',  name:'Cleopatra',         star:'Her eyeliner video gets a billion views!',            oops:'Caught cutting the lunch line at the pyramid cafeteria!'},
+  {id:'shakespeare',name:'William Shakespeare',star:'His new play is a smash. Everyone is saying "forsooth"!', oops:'Caught copying somebody else\'s homework!'},
+  {id:'earhart',    name:'Amelia Earhart',    star:'Sets a new flying record and waves to everyone on the way!', oops:'Parked her airplane in the principal\'s parking spot!'},
+  {id:'einstein',   name:'Albert Einstein',   star:'His hair becomes the coolest hairstyle of the year!',  oops:'Forgot to do his math homework. Again!'},
+  {id:'davinci',    name:'Leonardo da Vinci', star:'His flying machine actually works!',                   oops:'Caught drawing a mustache on the Mona Lisa!'},
+];
+const celeb = id => CELEBS.find(c => c.id === id);
+const faces = () => '<div class="faces">' + CELEBS.map(c => `<div class="face"><img src="img/${c.id}.jpg" alt="">${c.name}</div>`).join('') + '</div>';
+
+/* ============ EDIT YOUR SLIDES HERE ============
+   h = heading, html = body. The three story slides hold prompts in [brackets] for you to replace.
+   timer = minutes on the clock. go = a button that jumps to a game screen. */
+const SLIDES = [
+  {h:'Find Your Path:<br><mark>Build a Business</mark>',
+   html:'<p><span class="emoji">🚀</span></p><p class="big">Today YOU are the boss.</p>'},
+
+  {h:'Hands up! 🙋',
+   html:'<p class="big">Who has ever <span class="t">sold</span> something?</p><p>Lemonade? Cookies? A really good trading card?</p><p class="note">Then you have already run a business.</p>'},
+
+  {h:'I have a <mark>weird</mark> job title 💼',
+   html:'<p class="big">It has two parts.</p>'},
+  {h:'Part 1: <span class="b">Chief Operating Officer</span>',
+   html:'<p>I am responsible for all the little annoying things a business has to deal with:</p><ul><li>🧑‍🔧 who gets what job</li><li>💵 how much they get paid</li><li>📣 what to spend on marketing</li><li>🍩 &hellip;or on donuts</li></ul>'},
+  {h:'Part 2: <span class="t">Entrepreneur-in-Residence</span>',
+   html:'<p>I am responsible for what the business <b>does</b>:</p><ul><li>🧩 What problem does it solve?</li><li>🔧 How can we make it better?</li><li>💛 What kind of values do I want it to have?</li></ul>'},
+  {h:'One company I started: <mark>Homium</mark> 🏠',
+   html:'<p class="big">It helps people buy their <span class="p">first home</span>.</p><p>At a price they and their family can afford.</p>'},
+  {h:'Something I tried that <span class="r">flopped</span> 💥',
+   html:'<p><b>The plan:</b> ☀️🔋 We were ready to help people put solar panels and batteries on their houses, paid for by a government program.</p><p class="big"><span class="r">Oops!</span> The government cancelled the program.</p><p>Now there was no way to pay for the solar panels.</p>'},
+  {h:'What I changed 🔧',
+   html:'<p>We learned to line up <b>many sources of funding</b> before committing to a big program.</p><p class="big">Nobody gets it right the first time.</p>'},
+
+  {h:'An entrepreneur is someone who&hellip;',
+   html:'<ul><li>👀 sees a <b>problem</b></li><li>🔨 <b>builds</b> something to fix it</li><li>🎲 takes a <b>risk</b> to make it real</li></ul>'},
+
+  {h:'Your team 🤝',
+   html:'<div class="trio"><div style="border-color:var(--build)"><h3 class="b">🔨 Builder</h3><p>Holds the Build It sheet</p></div><div style="border-color:var(--tell)"><h3 class="t">📣 Teller</h3><p>Holds the Tell People sheet</p></div><div style="border-color:var(--protect)"><h3 class="p">🛡️ Protector</h3><p>Holds the Protect It sheet</p></div></div><p style="margin-top:.8em">🪙 <b>Banker:</b> holds the coins and the scorecard.</p><p class="note">A coin only goes down when the whole team agrees.</p>'},
+
+  {h:'Pick your business 💡',
+   html:'<div class="chips"><span>🐶 Dog walking</span><span>🧁 Bakery</span><span>🎮 Video game studio</span><span>🤖 Robot toys</span><span>🚲 Bike repair</span><span>🫧 Slime factory</span><span>🍋 Lemonade stand</span><span>👟 Sneaker design</span><span>🐹 Pet hotel</span><span>✨ Your own idea!</span></div><p style="margin-top:1em">Then give your company a <b>name</b>.</p>'},
+
+  {h:'You have <mark>10 coins</mark> 🪙',
+   html:'<div class="trio"><div style="border-color:var(--build)"><h3 class="b">🔨 Build It</h3><p>Make your product great</p></div><div style="border-color:var(--tell)"><h3 class="t">📣 Tell People</h3><p>Let the world know about it</p></div><div style="border-color:var(--protect)"><h3 class="p">🛡️ Protect It</h3><p>Be ready when things go wrong</p></div></div><p style="margin-top:.8em">Put each coin on something you want to buy. Spend all 10.</p>'},
+
+  {h:'Want to hire a <span class="t">celebrity</span>? ⭐',
+   html:() => faces() + '<p>One coin. Put it right on their face. Pick <b>one</b>, or nobody.</p>'},
+
+  {h:'So&hellip; how do you win? 🤔',
+   html:'<p class="big">🤫 I am not telling you.</p><p>Real businesses do not get the rules ahead of time either.</p><p>Talk it over. Make your <b>best guess</b>.</p>'},
+
+  {id:'go1', h:'Year 1: <mark>GO!</mark>', timer:8,
+   html:'<p>Name your company. Spend your 10 coins.</p>',
+   go:['y0','⏰ Coins down! See what happened &rarr;']},
+
+  {id:'recap', h:'Now you know the <mark>secret rules</mark> 🕵️',
+   html:'<ul><li>🔨📣 Customers = the <b>smaller</b> of <span class="b">Build</span> and <span class="t">Tell</span></li><li>⭐ Celebrities can make you famous&hellip; or embarrass you</li><li>🎲 Something always goes wrong. <span class="p">Protect</span> saves you</li></ul>'},
+
+  {id:'go2', h:'Year 2: <mark>Change your plan!</mark>', timer:6,
+   html:'<p>You get <b>10 coins</b> again, plus <b>1 more for every customer</b> you kept.</p><p class="big">What will your team do differently?</p>',
+   go:['y1','⏰ Coins down! See what happened &rarr;']},
+
+  {id:'debrief', h:'What did you change? 💬',
+   html:'<ul><li>😬 What went wrong in Year 1?</li><li>🔧 What did your team change?</li><li>🎲 Who took a big risk? How did it go?</li><li>🔮 What would you do in Year 3?</li></ul>'},
+
+  {h:'Find your path 🧭',
+   html:'<p class="big">Try. <span class="r">Miss.</span> <span class="b">Change it.</span> <span class="p">Try again.</span></p><p>That is what every entrepreneur does. You just did it too.</p>'},
+];
+
+const EVENTS = [
+  ['A customer wants a refund 😕','A small problem.'],
+  ['Your best machine breaks 🔧','It costs money to fix.'],
+  ['A surprise tax bill arrives 🧾','Did anyone hire an accountant?'],
+  ['A competitor copies your idea 🕵️','Did anyone hire a lawyer?'],
+  ['A storm floods your shop 🌧️','Did anyone buy insurance?'],
+  ['A giant lawsuit! ⚖️','The biggest problem there is.'],
+];
+const FACES = ['⚀','⚁','⚂','⚃','⚄','⚅'];
+const VIEWS = [['slides','Slides'],['teams','Teams'],['y0','Year 1'],['y1','Year 2'],['board','Scoreboard']];
+const KEY = 'find-your-path-v2';
+
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const rnd = a => a[Math.floor(Math.random() * a.length)];
+const yr = () => ({b:0,t:0,p:0,celeb:''});
+const mkTeam = (name='',biz='') => ({name,biz,y:[yr(),yr()]});
+const mkClass = () => ({teams:[],roll:[null,null],news:[null,null],stage:[0,0]});
+const blank = () => ({cur:'1',view:'slides',slide:0,cls:{'1':mkClass(),'2':mkClass()}});
+
+let S = blank(), armed = false, fresh = false;
+try { const j = JSON.parse(localStorage.getItem(KEY)); if (j && j.cls) S = j; } catch(e){}
+let save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e){} };
+const C = () => S.cls[S.cur];
+
+/* Scoring: customers = smaller of Build and Tell. Star celebrity doubles, embarrassed celebrity costs 2.
+   Then the Risk Die: lose (roll - Protect) if the roll is bigger. */
+function calc(t, yi){
+  const y = t.y[yi], c = C(), roll = c.roll[yi], news = c.news[yi];
+  const base = Math.min(y.b, y.t);
+  let fx = '', after = base;
+  if (news && y.celeb){
+    if (y.celeb === news.star){ fx = 'star'; after = base * 2; }
+    else if (y.celeb === news.oops){ fx = 'oops'; after = Math.max(0, base - 2); }
+  }
+  const loss = roll == null ? 0 : Math.min(after, Math.max(0, roll - y.p));
+  return {base, fx, after, loss, fin: after - loss};
+}
+const budget = (t, yi) => yi === 0 ? 10 : 10 + calc(t, 0).fin;
+const used = (t, yi) => { const y = t.y[yi]; return y.b + y.t + y.p; };
+
+function pickNews(yi){
+  const ids = CELEBS.map(c => c.id), h = [...new Set(C().teams.map(t => t.y[yi].celeb).filter(Boolean))];
+  let star, oops;
+  if (h.length >= 2){ star = rnd(h); oops = rnd(h.filter(x => x !== star)); }
+  else if (h.length === 1 && Math.random() < .5){ star = h[0]; oops = rnd(ids.filter(x => x !== star)); }
+  else if (h.length === 1){ oops = h[0]; star = rnd(ids.filter(x => x !== oops)); }
+  else { star = rnd(ids); oops = rnd(ids.filter(x => x !== star)); }
+  return {star, oops};
+}
+
+function practice(){
+  const c = C();
+  c.teams = [mkTeam('Slime Time','Slime factory'),mkTeam('Pup Patrol','Dog walking'),mkTeam('Pixel Pals','Video game studio'),mkTeam('Sweet Spot','Bakery')];
+  [[5,5,0,'einstein'],[4,4,2,''],[2,5,3,'cleopatra'],[3,3,4,'']].forEach((v,i) => Object.assign(c.teams[i].y[0], {b:v[0],t:v[1],p:v[2],celeb:v[3]}));
+}
+
+function confetti(){
+  const box = document.createElement('div'); box.className = 'confetti';
+  for (let i = 0; i < 70; i++){ const s = document.createElement('i'); s.textContent = ['🎉','⭐','🪙','🎈','✨'][i % 5];
+    s.style.left = Math.random()*100 + 'vw'; s.style.animationDelay = Math.random()*.8 + 's'; s.style.fontSize = (1.2 + Math.random()*1.6) + 'rem'; box.appendChild(s); }
+  document.body.appendChild(box); setTimeout(() => box.remove(), 4200);
+}
+
+/* countdown clock on the GO slides */
+let tLeft = 0, tInt = null, tSlide = -1;
+const fmt = s => Math.floor(s/60) + ':' + String(s%60).padStart(2,'0');
+function stopT(){ clearInterval(tInt); tInt = null; }
+function tick(){ tLeft--; const e = $('#tm'); if (tLeft <= 0){ stopT(); tLeft = 0; if (e){ e.textContent = "TIME'S UP!"; e.classList.add('done'); } } else if (e) e.textContent = fmt(tLeft); }
+
+function render(){
+  $('#tabs').innerHTML = VIEWS.map(([k,l]) => `<button class="${S.view===k?'on':'ghost'}" data-view="${k}">${l}</button>`).join(' ');
+  $('#classes').innerHTML = ['1','2'].map(k => `<button class="${S.cur===k?'on':'ghost'}" data-cls="${k}">Class ${k}</button>`).join(' ');
+  $('#reset').textContent = armed ? 'Really clear Class ' + S.cur + '?' : 'Clear class';
+  const m = $('#main');
+  if (S.view === 'slides') m.innerHTML = slideView();
+  else if (S.view === 'teams') m.innerHTML = teamsView();
+  else if (S.view === 'board') m.innerHTML = boardView();
+  else m.innerHTML = yearView(S.view === 'y0' ? 0 : 1);
+  if (S.view === 'y0' || S.view === 'y1') refresh();
+  fresh = false; save();
+}
+
+function slideView(){
+  const s = SLIDES[S.slide];
+  let extra = '';
+  if (s.timer){
+    if (tSlide !== S.slide){ stopT(); tLeft = s.timer * 60; tSlide = S.slide; }
+    extra += `<div class="timer"><span id="tm" class="${tLeft?'':'done'}">${tLeft ? fmt(tLeft) : "TIME'S UP!"}</span><button data-timer="1">${tInt ? 'Pause' : 'Start the clock'}</button></div>`;
+  }
+  if (s.go) extra += `<button class="go" data-view="${s.go[0]}">${s.go[1]}</button>`;
+  return `<section class="slide"><h1>${s.h}</h1>${typeof s.html === 'function' ? s.html() : s.html}${extra}</section>
+  <div class="slidenav"><button class="ghost" data-step="-1">&larr; Back</button><span>${S.slide+1} / ${SLIDES.length}</span><button data-step="1">Next &rarr;</button></div>`;
+}
+
+function teamsView(){
+  const c = C();
+  return `<h2>Class ${S.cur} teams</h2><p class="hint">Type each team's company name and what it sells.</p>` +
+    c.teams.map((t,i) => `<div class="teamrow"><span class="n">${i+1}</span>
+      <input type="text" placeholder="Company name" value="${esc(t.name)}" data-i="${i}" data-f="name">
+      <input type="text" placeholder="What do they sell?" value="${esc(t.biz)}" data-i="${i}" data-f="biz">
+      <button class="ghost" data-del="${i}">Remove</button></div>`).join('') +
+    `<p><button data-add="1">+ Add a team</button> ${c.teams.length ? '' : '<button class="ghost" data-practice="1">Load practice teams</button>'}</p>`;
+}
+
+function newsCard(kind, id){
+  const c = celeb(id);
+  return `<div class="${kind}"><img src="img/${c.id}.jpg" alt=""><div><b>${kind === 'star' ? '⭐ SUPERSTAR!' : '😬 OOPS!'} ${c.name}</b><span>${kind === 'star' ? c.star : c.oops}</span><em class="${kind === 'star' ? 'p' : 'r'}">${kind === 'star' ? 'Hired them? Your customers DOUBLE.' : 'Hired them? You lose 2 customers.'}</em></div></div>`;
+}
+
+function yearView(yi){
+  const c = C(), st = c.stage[yi], roll = c.roll[yi], news = c.news[yi];
+  if (!c.teams.length) return `<h2>Year ${yi+1}</h2><p class="hint">Add teams on the Teams tab first.</p>`;
+  const rule = yi === 0 ? 'Secret rule' : 'Rule';
+  let banner;
+  if (st === 0) banner = `<div class="bx"><div class="kick">Year ${yi+1}</div><div class="hl">Type in every team's coins</div><small>The totals from each sheet, and who they hired.</small></div><button class="next" data-next="${yi}">🥁 Who got customers?</button>`;
+  else if (st === 1) banner = `<div class="bx"><div class="kick">${rule} #1</div><div class="hl">Customers = the <u>smaller</u> of <span class="b">Build</span> and <span class="t">Tell</span></div><small>A great product nobody heard about gets no customers. Neither does a famous product that breaks.</small></div><button class="next" data-next="${yi}">📰 Celebrity news!</button>`;
+  else if (st === 2) banner = `<div class="news">${newsCard('star', news.star)}${newsCard('oops', news.oops)}</div><button class="next" data-next="${yi}">🎲 Roll the Risk Die</button>`;
+  else banner = `<div id="die" class="${roll ? '' : 'rolling'}">${roll ? FACES[roll-1] : FACES[0]}</div><div class="bx">` +
+    (roll ? `<div class="kick">${rule} #3: something always goes wrong</div><div class="hl">Rolled a ${roll}: ${EVENTS[roll-1][0]}</div><small>${EVENTS[roll-1][1]} Is ${roll} bigger than your <b class="p">Protect</b>? You lose the difference.</small>`
+          : `<div class="hl">Rolling&hellip;</div>`) + `</div>` +
+    (roll ? (yi === 0 ? `<button class="next" data-show="recap">Back to the show &rarr;</button>` : `<button class="next" data-view="board">🏆 Scoreboard</button>`) : '');
+  const n = k => fresh === k ? ' class="new"' : '';
+  const opts = id => `<option value="">nobody</option>` + CELEBS.map(x => `<option value="${x.id}" ${x.id===id?'selected':''}>${x.name}</option>`).join('');
+  return `<div class="banner">${banner}</div>
+  <table><thead><tr><th>Team</th><th class="b">Build</th><th class="t">Tell</th><th class="p">Protect</th><th>Celebrity</th><th>Coins</th>${st>=1?'<th>Customers</th>':''}${st>=2?'<th>News</th>':''}${st>=3?'<th class="r">Risk</th>':''}${st>=1?`<th>Kept</th>`:''}</tr></thead><tbody>` +
+  c.teams.map((t,i) => { const y = t.y[yi]; return `<tr>
+    <td>${esc(t.name || 'Team ' + (i+1))}<small>${esc(t.biz)}</small></td>
+    <td><input class="ib" type="number" min="0" value="${y.b}" data-i="${i}" data-y="${yi}" data-f="b"></td>
+    <td><input class="it" type="number" min="0" value="${y.t}" data-i="${i}" data-y="${yi}" data-f="t"></td>
+    <td><input class="ip" type="number" min="0" value="${y.p}" data-i="${i}" data-y="${yi}" data-f="p"></td>
+    <td><select data-i="${i}" data-y="${yi}" data-f="celeb">${opts(y.celeb)}</select></td>
+    <td id="c${i}"></td>${st>=1?`<td id="k${i}"${n(1)}></td>`:''}${st>=2?`<td id="n${i}"${n(2)}></td>`:''}${st>=3?`<td id="l${i}"${n(3)}></td>`:''}${st>=1?`<td id="f${i}" class="final"></td>`:''}</tr>`; }).join('') +
+  `</tbody></table><p class="hint">${yi === 1 ? 'Year 2 coins = 10 + the customers each team kept in Year 1. ' : ''}${st ? `<button class="ghost" data-redo="${yi}">Start this reveal over</button>` : ''}</p>`;
+}
+
+function refresh(){
+  const yi = S.view === 'y0' ? 0 : 1, c = C();
+  c.teams.forEach((t,i) => {
+    const k = calc(t, yi), u = used(t, yi), bud = budget(t, yi);
+    const set = (id, h) => { const e = $('#'+id+i); if (e) e.innerHTML = h; return e; };
+    const e = set('c', `${u} / ${bud}`); if (e) e.classList.toggle('over', u > bud);
+    set('k', k.base);
+    set('n', k.fx === 'star' ? '<span class="p">⭐ x2</span>' : k.fx === 'oops' ? '<span class="r">😬 -2</span>' : '');
+    set('l', c.roll[yi] ? (k.loss ? `<span class="r">-${k.loss}</span>` : '<span class="p">safe</span>') : '');
+    set('f', k.fin);
+  });
+}
+
+function boardView(){
+  const c = C();
+  if (!c.teams.length) return `<h2>Scoreboard</h2><p class="hint">No teams yet.</p>`;
+  const rows = c.teams.map((t,i) => { const a = calc(t,0).fin, b = calc(t,1).fin; return {n: t.name || 'Team ' + (i+1), biz: t.biz, a, b, tot: a+b}; }).sort((x,y) => y.tot - x.tot);
+  const max = Math.max(1, ...rows.map(r => r.tot));
+  return `<h2>🏆 Class ${S.cur} scoreboard</h2><table><thead><tr><th></th><th>Company</th><th>Year 1</th><th>Year 2</th><th>Total customers</th><th style="width:35%"></th></tr></thead><tbody>` +
+    rows.map((r,i) => `<tr><td class="rank">${i === 0 ? '👑' : i+1}</td><td style="text-align:left">${esc(r.n)}<small>${esc(r.biz)}</small></td><td>${r.a}</td><td>${r.b}</td><td class="final">${r.tot}</td><td><div class="bar" style="width:${100*r.tot/max}%"></div></td></tr>`).join('') +
+    `</tbody></table><p><button class="go" data-show="debrief">Back to the show &rarr;</button></p>`;
+}
+
+function step(d){ S.slide = Math.max(0, Math.min(SLIDES.length-1, S.slide + d)); render(); }
+
+function rollDie(yi){
+  const c = C(); let n = 0;
+  const iv = setInterval(() => { const el = $('#die'); if (el) el.textContent = rnd(FACES); if (++n > 22){ clearInterval(iv); c.roll[yi] = 1 + Math.floor(Math.random()*6); fresh = 3; render(); } }, 90);
+}
+
+document.addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  const d = b.dataset, c = C();
+  if (b.id === 'reset'){ if (armed){ S.cls[S.cur] = mkClass(); armed = false; } else { armed = true; setTimeout(() => { armed = false; render(); }, 4000); } return render(); }
+  if (d.view){ S.view = d.view; if (d.view === 'board') confetti(); }
+  else if (d.show){ S.view = 'slides'; S.slide = Math.max(0, SLIDES.findIndex(s => s.id === d.show)); }
+  else if (d.cls) S.cur = d.cls;
+  else if (d.step) return step(+d.step);
+  else if (d.timer){ if (tInt) stopT(); else { if (tLeft <= 0) tLeft = SLIDES[S.slide].timer * 60; tInt = setInterval(tick, 1000); } }
+  else if (d.add) c.teams.push(mkTeam());
+  else if (d.practice) practice();
+  else if (d.del) c.teams.splice(+d.del, 1);
+  else if (d.redo){ const yi = +d.redo; c.stage[yi] = 0; c.news[yi] = null; c.roll[yi] = null; }
+  else if (d.next){
+    const yi = +d.next, st = c.stage[yi];
+    if (st === 0){ c.stage[yi] = 1; fresh = 1; }
+    else if (st === 1){ c.news[yi] = pickNews(yi); c.stage[yi] = 2; fresh = 2; confetti(); }
+    else if (st === 2){ c.stage[yi] = 3; c.roll[yi] = null; render(); return rollDie(yi); }
+  }
+  render();
+  if (d.add){ const ins = document.querySelectorAll('.teamrow input[data-f=name]'); ins[ins.length-1].focus(); }
+});
+
+document.addEventListener('input', e => {
+  const d = e.target.dataset; if (d.i === undefined) return;
+  const t = C().teams[+d.i];
+  if (d.f === 'name' || d.f === 'biz') t[d.f] = e.target.value;
+  else if (d.f === 'celeb'){ t.y[+d.y].celeb = e.target.value; refresh(); }
+  else { t.y[+d.y][d.f] = Math.max(0, parseInt(e.target.value, 10) || 0); refresh(); }
+  save();
+});
+
+document.addEventListener('keydown', e => {
+  if (S.view !== 'slides' || /INPUT|TEXTAREA|SELECT/.test(e.target.tagName)) return;
+  if (['ArrowRight','PageDown',' '].includes(e.key)){ e.preventDefault(); step(1); }
+  if (['ArrowLeft','PageUp'].includes(e.key)){ e.preventDefault(); step(-1); }
+});
+
+/* test hook: index.html?demo=y0&st=2 or ?demo=slides&s=9 loads practice teams without touching saved data */
+const q = new URLSearchParams(location.search);
+if (q.get('demo')){
+  S = blank(); practice(); S.view = q.get('demo'); S.slide = +(q.get('s') || 0); save = () => {};
+  const st = +(q.get('st') || 0), c = C(); c.stage[0] = st;
+  if (st >= 2) c.news[0] = {star:'cleopatra', oops:'einstein'};
+  if (st >= 3) c.roll[0] = 4;
+}
+render();
+</script>
+</body>
+</html>
