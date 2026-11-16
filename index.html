@@ -355,7 +355,7 @@ function rollDie(yi){
 document.addEventListener('click', e => {
   const b = e.target.closest('button'); if (!b) return;
   const d = b.dataset, c = C();
-  if (b.id === 'reset'){ if (armed){ S.cls[S.cur] = mkClass(); armed = false; } else { armed = true; setTimeout(() => { armed = false; render(); }, 4000); } return render(); }
+  if (b.id === 'reset'){ if (armed){ S.cls[S.cur] = mkClass(); S.view = 'slides'; S.slide = 0; stopT(); tSlide = -1; armed = false; save(); } else { armed = true; setTimeout(() => { armed = false; render(); }, 4000); } return render(); }
   if (d.view){ S.view = d.view; if (d.view === 'board') confetti(); }
   else if (d.show){ S.view = 'slides'; S.slide = Math.max(0, SLIDES.findIndex(s => s.id === d.show)); }
   else if (d.cls) S.cur = d.cls;
