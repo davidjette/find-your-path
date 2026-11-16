@@ -210,7 +210,8 @@ const cname = (k = S.cur) => S.names[k] || 'Class ' + k;
 function renderHead(){
   $('#tabs').innerHTML = VIEWS.map(([k,l]) => `<button class="${S.view===k?'on':'ghost'}" data-view="${k}">${l}</button>`).join(' ');
   $('#classes').innerHTML = ['1','2'].map(k => `<button class="${S.cur===k?'on':'ghost'}" data-cls="${k}">${esc(cname(k))}</button>`).join(' ');
-  $('#reset').textContent = armed ? 'Really clear ' + cname() + '?' : 'Clear class';
+  $('#reset').textContent = armed ? 'Are you sure? Click again to clear ' + cname() : 'Clear class';
+  $('#reset').style.cssText = armed ? 'background:#dc2626;color:#fff;border-color:#dc2626' : '';
 }
 
 /* Scoring: customers = smaller of Build and Tell. Star celebrity doubles, embarrassed celebrity costs 2.
