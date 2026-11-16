@@ -20,6 +20,8 @@ button:focus-visible,input:focus-visible,select:focus-visible{outline:4px solid 
 header{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:8px 16px;border-bottom:3px solid var(--line);background:var(--card)}
 header .brand{font-weight:900;font-size:1.1rem;margin-right:auto}
 header button{padding:.35em .8em;font-size:.9rem}
+a.nav{font-size:.9rem;font-weight:800;color:var(--pink);text-decoration:none;padding:.35em .5em}
+a.nav:hover{text-decoration:underline}
 main{flex:1;overflow:auto;padding:22px 4vw}
 h1{font-size:clamp(2.6rem,6.5vw,5.6rem);line-height:1.02;margin:0 0 .25em;font-weight:900;letter-spacing:-.02em}
 h2{font-size:clamp(1.6rem,3vw,2.4rem);margin:0 0 .5em}
@@ -100,6 +102,8 @@ select{font:inherit;font-size:1rem;font-weight:700;border:3px solid var(--line);
   <span style="width:16px"></span>
   <span id="classes"></span>
   <button class="ghost" id="reset"></button>
+  <a class="nav" href="sheets.html" target="_blank">Sheets</a>
+  <a class="nav" href="notes.html" target="_blank">Notes</a>
 </header>
 <main id="main"></main>
 
@@ -130,9 +134,9 @@ const SLIDES = [
   {h:'Part 1: <span class="b">Chief Operating Officer</span>',
    html:'<p>I am responsible for all the little annoying things a business has to deal with:</p><ul><li>🧑‍🔧 who gets what job</li><li>💵 how much they get paid</li><li>📣 what to spend on marketing</li><li>🍩 &hellip;or on donuts</li></ul>'},
   {h:'Part 2: <span class="t">Entrepreneur-in-Residence</span>',
-   html:'<p>I am responsible for what the business <b>does</b>:</p><ul><li>🧩 What problem does it solve?</li><li>🔧 How can we make it better?</li><li>💛 What kind of values do I want it to have?</li></ul>'},
+   html:'<p>I am responsible for what the business <b>does</b>:</p><ul><li>🧩 What problem does it solve?</li><li>🔧 How can we make it better?</li><li>💛 What kind of values do we want it to have?</li></ul>'},
   {h:'One company I started: <mark>Homium</mark> 🏠',
-   html:'<p class="big">It helps people buy their <span class="p">first home</span>.</p><p>At a price they and their family can afford.</p>'},
+   html:'<p class="big">It helps people buy their <span class="p">first home</span> at a price they and their family can afford.</p>'},
   {h:'Something I tried that <span class="r">flopped</span> 💥',
    html:'<p><b>The plan:</b> ☀️🔋 We were ready to help people put solar panels and batteries on their houses, paid for by a government program.</p><p class="big"><span class="r">Oops!</span> The government cancelled the program.</p><p>Now there was no way to pay for the solar panels.</p>'},
   {h:'What I changed 🔧',
@@ -142,28 +146,31 @@ const SLIDES = [
    html:'<ul><li>👀 sees a <b>problem</b></li><li>🔨 <b>builds</b> something to fix it</li><li>🎲 takes a <b>risk</b> to make it real</li></ul>'},
 
   {h:'Your team 🤝',
-   html:'<div class="trio"><div style="border-color:var(--build)"><h3 class="b">🔨 Builder</h3><p>Holds the Build It sheet</p></div><div style="border-color:var(--tell)"><h3 class="t">📣 Teller</h3><p>Holds the Tell People sheet</p></div><div style="border-color:var(--protect)"><h3 class="p">🛡️ Protector</h3><p>Holds the Protect It sheet</p></div></div>'},
+   html:'<div class="trio"><div style="border-color:var(--build)"><h3 class="b">🔨 Builders</h3><p>Love making things great</p></div><div style="border-color:var(--tell)"><h3 class="t">📣 Tellers</h3><p>Love getting the word out</p></div><div style="border-color:var(--protect)"><h3 class="p">🛡️ Protectors</h3><p>Love keeping things safe</p></div></div><p style="margin-top:.8em">Which one are <b>you</b>?</p>'},
 
   {h:'Pick your business 💡',
-   html:'<div class="chips"><span>🐶 Dog walking</span><span>🧁 Bakery</span><span>🎮 Video game studio</span><span>🤖 Robot toys</span><span>🚲 Bike repair</span><span>🫧 Slime factory</span><span>🍋 Lemonade stand</span><span>👟 Sneaker design</span><span>🐹 Pet hotel</span><span>✨ Your own idea!</span></div><p style="margin-top:1em">Then give your company a <b>name</b>.</p>'},
+   html:'<div class="chips"><span>🤖 Robot dogs</span><span>🧁 Bakery</span><span>🏦 Investment bank</span><span>🎮 Video game studio</span><span>🌯 Frozen burritos</span><span>🐶 Dog walking</span><span>🚗 Flying cars</span><span>👗 Fashion line</span><span>📺 AI mindrot channel</span><span>🍋 Lemonade stand</span><span>⚡ Pokémon gym</span><span>🚲 Bike repair</span><span>👟 Sneaker design</span><span>🐹 Pet hotel</span><span>✨ Your own idea!</span></div>'},
+
+  {h:'Pick your <mark>name</mark> ✏️',
+   html:'<div class="chips"><span>🌯 Frozen Fiesta, LLC</span><span>🤖 Good Boy Robotics, Inc.</span><span>🚗 Zoom Zoom Limited</span><span>🏦 Piggy Bank &amp; Partners</span><span>🧦 The Fuzzy Sock Foundation</span><span>🧠 Mega Brain Equity Partners</span><span>🧁 Sprinkle Capital Group</span><span>🍋 Lemon Squeeze Holdings</span></div><p style="margin-top:1em">Make it sound official. Add <b>LLC</b>, <b>Inc.</b>, <b>Limited</b>, <b>Partners</b>, <b>Foundation</b> or <b>Equity Partners</b> to the end.</p>'},
 
   {h:'You have <mark>10 coins</mark> 🪙',
    html:'<p style="margin-bottom:.7em">Place each coin on something your <b>team agrees</b> to invest in. <b class="t">Spend all 10.</b></p><div class="trio"><div style="border-color:var(--build)"><h3 class="b">🔨 Build It</h3><p>Make your product great</p></div><div style="border-color:var(--tell)"><h3 class="t">📣 Tell People</h3><p>Let the world know about it</p></div><div style="border-color:var(--protect)"><h3 class="p">🛡️ Protect It</h3><p>Be ready when things go wrong</p></div></div>'},
 
   {h:'Want to hire a <span class="t">celebrity</span>? ⭐',
-   html:() => faces() + '<p>One coin. Put it right on their face. Pick <b>one</b>, or nobody.</p>'},
+   html:() => faces() + '<p>Do you want to have a celebrity represent your brand?</p><p class="big">This comes with <span class="r">risks</span> and <span class="p">rewards</span>!</p>'},
 
   {h:'So&hellip; how do you win? 🤔',
    html:'<p class="big">🤫 I am not telling you.</p><p>Real businesses do not get the rules ahead of time either.</p><p>Talk it over. Make your <b>best guess</b>.</p>'},
 
-  {id:'go1', h:'Year 1: <mark>GO!</mark>', timer:8,
+  {id:'go1', h:'Year 1: <mark>GO!</mark>', timer:6,
    html:'<p>Name your company. Spend your 10 coins.</p>',
    go:['y0','⏰ Coins down! See what happened &rarr;']},
 
   {id:'recap', h:'Now you know the <mark>secret rules</mark> 🕵️',
    html:'<ul><li>🔨📣 Customers = the <b>smaller</b> of <span class="b">Build</span> and <span class="t">Tell</span></li><li>⭐ Celebrities can make you famous&hellip; or embarrass you</li><li>🎲 Something always goes wrong. <span class="p">Protect</span> saves you</li></ul>'},
 
-  {id:'go2', h:'Year 2: <mark>Change your plan!</mark>', timer:6,
+  {id:'go2', h:'Year 2: <mark>Change your plan!</mark>', timer:3,
    html:'<p>You get <b>10 coins</b> again, plus <b>1 more for every customer</b> you kept.</p><p class="big">What will your team do differently?</p>',
    go:['y1','⏰ Coins down! See what happened &rarr;']},
 
@@ -192,12 +199,19 @@ const rnd = a => a[Math.floor(Math.random() * a.length)];
 const yr = () => ({b:0,t:0,p:0,celeb:''});
 const mkTeam = (name='',biz='') => ({name,biz,y:[yr(),yr()]});
 const mkClass = () => ({teams:[],roll:[null,null],news:[null,null],stage:[0,0]});
-const blank = () => ({cur:'1',view:'slides',slide:0,cls:{'1':mkClass(),'2':mkClass()}});
+const blank = () => ({names:{'1':'Blue Cluster','2':'Class 2'},cur:'1',view:'slides',slide:0,cls:{'1':mkClass(),'2':mkClass()}});
 
 let S = blank(), armed = false, fresh = false;
 try { const j = JSON.parse(localStorage.getItem(KEY)); if (j && j.cls) S = j; } catch(e){}
 let save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e){} };
+if (!S.names) S.names = {'1':'Blue Cluster','2':'Class 2'};
 const C = () => S.cls[S.cur];
+const cname = (k = S.cur) => S.names[k] || 'Class ' + k;
+function renderHead(){
+  $('#tabs').innerHTML = VIEWS.map(([k,l]) => `<button class="${S.view===k?'on':'ghost'}" data-view="${k}">${l}</button>`).join(' ');
+  $('#classes').innerHTML = ['1','2'].map(k => `<button class="${S.cur===k?'on':'ghost'}" data-cls="${k}">${esc(cname(k))}</button>`).join(' ');
+  $('#reset').textContent = armed ? 'Really clear ' + cname() + '?' : 'Clear class';
+}
 
 /* Scoring: customers = smaller of Build and Tell. Star celebrity doubles, embarrassed celebrity costs 2.
    Then the Risk Die: lose (roll - Protect) if the roll is bigger. */
@@ -227,7 +241,7 @@ function pickNews(yi){
 
 function practice(){
   const c = C();
-  c.teams = [mkTeam('Slime Time','Slime factory'),mkTeam('Pup Patrol','Dog walking'),mkTeam('Pixel Pals','Video game studio'),mkTeam('Sweet Spot','Bakery')];
+  c.teams = [mkTeam('Frozen Fiesta, LLC','Frozen burritos'),mkTeam('Pup Patrol','Dog walking'),mkTeam('Pixel Pals','Video game studio'),mkTeam('Sweet Spot','Bakery')];
   [[5,5,0,'einstein'],[4,4,2,''],[2,5,3,'cleopatra'],[3,3,4,'']].forEach((v,i) => Object.assign(c.teams[i].y[0], {b:v[0],t:v[1],p:v[2],celeb:v[3]}));
 }
 
@@ -245,9 +259,7 @@ function stopT(){ clearInterval(tInt); tInt = null; }
 function tick(){ tLeft--; const e = $('#tm'); if (tLeft <= 0){ stopT(); tLeft = 0; if (e){ e.textContent = "TIME'S UP!"; e.classList.add('done'); } } else if (e) e.textContent = fmt(tLeft); }
 
 function render(){
-  $('#tabs').innerHTML = VIEWS.map(([k,l]) => `<button class="${S.view===k?'on':'ghost'}" data-view="${k}">${l}</button>`).join(' ');
-  $('#classes').innerHTML = ['1','2'].map(k => `<button class="${S.cur===k?'on':'ghost'}" data-cls="${k}">Class ${k}</button>`).join(' ');
-  $('#reset').textContent = armed ? 'Really clear Class ' + S.cur + '?' : 'Clear class';
+  renderHead();
   const m = $('#main');
   if (S.view === 'slides') m.innerHTML = slideView();
   else if (S.view === 'teams') m.innerHTML = teamsView();
@@ -271,7 +283,7 @@ function slideView(){
 
 function teamsView(){
   const c = C();
-  return `<h2>Class ${S.cur} teams</h2><p class="hint">Type each team's company name and what it sells.</p>` +
+  return `<div class="teamrow" style="grid-template-columns:auto 1fr"><b>Class name</b><input type="text" value="${esc(cname())}" data-cname="1"></div><h2>Teams</h2><p class="hint">Type each team's company name and what it sells.</p>` +
     c.teams.map((t,i) => `<div class="teamrow"><span class="n">${i+1}</span>
       <input type="text" placeholder="Company name" value="${esc(t.name)}" data-i="${i}" data-f="name">
       <input type="text" placeholder="What do they sell?" value="${esc(t.biz)}" data-i="${i}" data-f="biz">
@@ -328,7 +340,7 @@ function boardView(){
   if (!c.teams.length) return `<h2>Scoreboard</h2><p class="hint">No teams yet.</p>`;
   const rows = c.teams.map((t,i) => { const a = calc(t,0).fin, b = calc(t,1).fin; return {n: t.name || 'Team ' + (i+1), biz: t.biz, a, b, tot: a+b}; }).sort((x,y) => y.tot - x.tot);
   const max = Math.max(1, ...rows.map(r => r.tot));
-  return `<h2>🏆 Class ${S.cur} scoreboard</h2><table><thead><tr><th></th><th>Company</th><th>Year 1</th><th>Year 2</th><th>Total customers</th><th style="width:35%"></th></tr></thead><tbody>` +
+  return `<h2>🏆 ${esc(cname())} scoreboard</h2><table><thead><tr><th></th><th>Company</th><th>Year 1</th><th>Year 2</th><th>Total customers</th><th style="width:35%"></th></tr></thead><tbody>` +
     rows.map((r,i) => `<tr><td class="rank">${i === 0 ? '👑' : i+1}</td><td style="text-align:left">${esc(r.n)}<small>${esc(r.biz)}</small></td><td>${r.a}</td><td>${r.b}</td><td class="final">${r.tot}</td><td><div class="bar" style="width:${100*r.tot/max}%"></div></td></tr>`).join('') +
     `</tbody></table><p><button class="go" data-show="debrief">Back to the show &rarr;</button></p>`;
 }
@@ -364,7 +376,9 @@ document.addEventListener('click', e => {
 });
 
 document.addEventListener('input', e => {
-  const d = e.target.dataset; if (d.i === undefined) return;
+  const d = e.target.dataset;
+  if (d.cname){ S.names[S.cur] = e.target.value; renderHead(); return save(); }
+  if (d.i === undefined) return;
   const t = C().teams[+d.i];
   if (d.f === 'name' || d.f === 'biz') t[d.f] = e.target.value;
   else if (d.f === 'celeb'){ t.y[+d.y].celeb = e.target.value; refresh(); }
