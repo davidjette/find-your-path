@@ -199,17 +199,21 @@ const rnd = a => a[Math.floor(Math.random() * a.length)];
 const yr = () => ({b:0,t:0,p:0,celeb:''});
 const mkTeam = (name='',biz='') => ({name,biz,y:[yr(),yr()]});
 const mkClass = () => ({teams:[],roll:[null,null],news:[null,null],stage:[0,0]});
-const blank = () => ({names:{'1':'Blue Cluster','2':'Class 2'},cur:'1',view:'slides',slide:0,cls:{'1':mkClass(),'2':mkClass()}});
+const KEYS = ['1','2','3','4'];
+const NAMES = () => ({'1':'Purple','2':'Orange','3':'Indigo','4':'Blue'});
+const blank = () => ({names:NAMES(),cur:'1',view:'slides',slide:0,cls:Object.fromEntries(KEYS.map(k => [k, mkClass()]))});
 
 let S = blank(), armed = false, fresh = false;
 try { const j = JSON.parse(localStorage.getItem(KEY)); if (j && j.cls) S = j; } catch(e){}
 let save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e){} };
-if (!S.names) S.names = {'1':'Blue Cluster','2':'Class 2'};
+if (!S.names || !S.cls['4']) S.names = NAMES();
+KEYS.forEach(k => { if (!S.cls[k]) S.cls[k] = mkClass(); });
+if (!S.cls[S.cur]) S.cur = '1';
 const C = () => S.cls[S.cur];
 const cname = (k = S.cur) => S.names[k] || 'Class ' + k;
 function renderHead(){
   $('#tabs').innerHTML = VIEWS.map(([k,l]) => `<button class="${S.view===k?'on':'ghost'}" data-view="${k}">${l}</button>`).join(' ');
-  $('#classes').innerHTML = ['1','2'].map(k => `<button class="${S.cur===k?'on':'ghost'}" data-cls="${k}">${esc(cname(k))}</button>`).join(' ');
+  $('#classes').innerHTML = KEYS.map(k => `<button class="${S.cur===k?'on':'ghost'}" data-cls="${k}">${esc(cname(k))}</button>`).join(' ');
   $('#reset').textContent = armed ? 'Are you sure? Click again to clear ' + cname() : 'Clear class';
   $('#reset').style.cssText = armed ? 'background:#dc2626;color:#fff;border-color:#dc2626' : '';
 }
@@ -359,7 +363,7 @@ document.addEventListener('click', e => {
   if (b.id === 'reset'){ if (armed){ S.cls[S.cur] = mkClass(); S.view = 'slides'; S.slide = 0; stopT(); tSlide = -1; armed = false; save(); } else { armed = true; setTimeout(() => { armed = false; render(); }, 4000); } return render(); }
   if (d.view){ S.view = d.view; if (d.view === 'board') confetti(); }
   else if (d.show){ S.view = 'slides'; S.slide = Math.max(0, SLIDES.findIndex(s => s.id === d.show)); }
-  else if (d.cls) S.cur = d.cls;
+  else if (d.cls){ if (d.cls !== S.cur && !S.cls[d.cls].teams.length){ S.view = 'slides'; S.slide = 0; stopT(); tSlide = -1; } S.cur = d.cls; }
   else if (d.step) return step(+d.step);
   else if (d.timer){ if (tInt) stopT(); else { if (tLeft <= 0) tLeft = SLIDES[S.slide].timer * 60; tInt = setInterval(tick, 1000); } }
   else if (d.add) c.teams.push(mkTeam());
