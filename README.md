@@ -1,6 +1,6 @@
 # Build a Business
 
-A 50-minute classroom game that teaches 2nd to 5th graders what an entrepreneur does: spend 10 coins, see what happens, change the plan and try again.
+A 50-minute classroom game that teaches 2nd to 5th graders what an entrepreneur does. You and your team are forming a new company to sell a new product. You can invest 10 coins in different priorities, see what happens, change the plan and try again.
 
 **Live demo:** https://davidjette.github.io/find-your-path/
 
