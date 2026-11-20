@@ -110,8 +110,8 @@ select{font:inherit;font-size:1rem;font-weight:700;border:3px solid var(--line);
 <script>
 const CELEBS = [
   {id:'washington', name:'George Washington', star:'His new dance, "The Delaware Crossing," goes viral!', oops:'Caught telling a fib about a cherry tree!'},
-  {id:'cleopatra',  name:'Cleopatra',         star:'Her eyeliner video gets a billion views!',            oops:'Caught cutting the lunch line at the pyramid cafeteria!'},
-  {id:'shakespeare',name:'William Shakespeare',star:'His new play is a smash. Everyone is saying "forsooth"!', oops:'Caught copying somebody else\'s homework!'},
+  {id:'kahlo',      name:'Frida Kahlo',       star:'Her new self-portrait becomes the most famous selfie in the world!', oops:'Got paint all over the classroom carpet!'},
+  {id:'walker',     name:'Madam C.J. Walker', star:'Her new shampoo sells out in every store in the country!', oops:'Used up all the hot water in the whole neighborhood!'},
   {id:'earhart',    name:'Amelia Earhart',    star:'Sets a new flying record and waves to everyone on the way!', oops:'Parked her airplane in the principal\'s parking spot!'},
   {id:'einstein',   name:'Albert Einstein',   star:'His hair becomes the coolest hairstyle of the year!',  oops:'Forgot to do his math homework. Again!'},
   {id:'davinci',    name:'Leonardo da Vinci', star:'His flying machine actually works!',                   oops:'Caught drawing a mustache on the Mona Lisa!'},
@@ -208,6 +208,9 @@ try { const j = JSON.parse(localStorage.getItem(KEY)); if (j && j.cls) S = j; } 
 let save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e){} };
 if (!S.names || !S.cls['4']) S.names = NAMES();
 KEYS.forEach(k => { if (!S.cls[k]) S.cls[k] = mkClass(); });
+/* drop saved picks of celebrities that are no longer in the game */
+KEYS.forEach(k => { const c = S.cls[k]; c.teams.forEach(t => t.y.forEach(y => { if (y.celeb && !celeb(y.celeb)) y.celeb = ''; }));
+  c.news = c.news.map((n, i) => { if (n && !(celeb(n.star) && celeb(n.oops))){ c.stage[i] = Math.min(c.stage[i], 1); c.roll[i] = null; return null; } return n; }); });
 if (!S.cls[S.cur]) S.cur = '1';
 const C = () => S.cls[S.cur];
 const cname = (k = S.cur) => S.names[k] || 'Class ' + k;
@@ -247,7 +250,7 @@ function pickNews(yi){
 function practice(){
   const c = C();
   c.teams = [mkTeam('Frozen Fiesta, LLC','Frozen burritos'),mkTeam('Pup Patrol','Dog walking'),mkTeam('Pixel Pals','Video game studio'),mkTeam('Sweet Spot','Bakery')];
-  [[5,5,0,'einstein'],[4,4,2,''],[2,5,3,'cleopatra'],[3,3,4,'']].forEach((v,i) => Object.assign(c.teams[i].y[0], {b:v[0],t:v[1],p:v[2],celeb:v[3]}));
+  [[5,5,0,'einstein'],[4,4,2,''],[2,5,3,'kahlo'],[3,3,4,'']].forEach((v,i) => Object.assign(c.teams[i].y[0], {b:v[0],t:v[1],p:v[2],celeb:v[3]}));
 }
 
 function confetti(){
@@ -402,7 +405,7 @@ const q = new URLSearchParams(location.search);
 if (q.get('demo')){
   S = blank(); practice(); S.view = q.get('demo'); S.slide = +(q.get('s') || 0); save = () => {};
   const st = +(q.get('st') || 0), c = C(); c.stage[0] = st;
-  if (st >= 2) c.news[0] = {star:'cleopatra', oops:'einstein'};
+  if (st >= 2) c.news[0] = {star:'kahlo', oops:'einstein'};
   if (st >= 3) c.roll[0] = 4;
 }
 render();

@@ -67,8 +67,8 @@ The portraits are thumbnails of the lead images of each person's English Wikiped
 | Person | Source |
 |---|---|
 | George Washington | Portrait by Gilbert Stuart |
-| Cleopatra | Bust in the Altes Museum, Berlin (photo: Louis le Grand) |
-| William Shakespeare | Portrait attributed to John Taylor |
+| Frida Kahlo | Photograph by Guillermo Kahlo, 1932 |
+| Madam C.J. Walker | Photograph by Addison N. Scurlock, about 1914 |
 | Amelia Earhart | Photograph by Underwood & Underwood |
 | Albert Einstein | Photograph by Oren Jack Turner |
 | Leonardo da Vinci | Portrait attributed to Francesco Melzi |
